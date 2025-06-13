@@ -39,7 +39,7 @@ async function makeIngressRequest(
   headers = filterCookies(headers, (key) => key === '_iidt')
   addProxyIntegrationHeaders(headers, receivedRequest.url, env)
   const body = await (receivedRequest.headers.get('Content-Type') ? receivedRequest.blob() : Promise.resolve(null))
-  console.log(`sending ingress request to ${requestURL}...`)
+  console.log(`sending ingress request to ${requestURL}...`, headers)
   const request = new Request(requestURL, new Request(receivedRequest, { headers, body }))
 
   return fetch(request).then((oldResponse) => new Response(oldResponse.body, oldResponse))
