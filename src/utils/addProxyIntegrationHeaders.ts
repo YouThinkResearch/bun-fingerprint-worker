@@ -12,7 +12,7 @@ export function addProxyIntegrationHeaders(headers: Headers, url: string, env: W
 
 export function getIPFromHeaders(headers: Headers) {
   const allowedHeaders = ['X-Envoy-External-Address', 'CF-Connecting-IP', 'X-Real-Ip']
-  const connectingIP = allowedHeaders.find((header) => headers.get(header))
+  const connectingIPHeader = allowedHeaders.find((header) => headers.get(header))
 
-  return connectingIP || '45.85.105.85'
+  return connectingIPHeader ? headers.get(connectingIPHeader) : '45.85.105.85'
 }
