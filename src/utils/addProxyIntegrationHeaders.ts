@@ -14,5 +14,5 @@ export function getIPFromHeaders(headers: Headers) {
   const allowedHeaders = ['X-Envoy-External-Address', 'CF-Connecting-IP', 'X-Real-Ip']
   const connectingIPHeader = allowedHeaders.find((header) => headers.get(header))
 
-  return connectingIPHeader ? headers.get(connectingIPHeader) : '45.85.105.85'
+  return connectingIPHeader ? headers.get(connectingIPHeader)! : '45.85.105.85'
 }
