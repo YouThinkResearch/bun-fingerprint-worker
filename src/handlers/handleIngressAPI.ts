@@ -55,6 +55,7 @@ function makeCacheEndpointRequest(
   const requestURL = createRequestURL(ingressBaseUrl, receivedRequest.url, routeMatches)
   const headers = new Headers(receivedRequest.headers)
   headers.delete('Cookie')
+  headers.delete('host')
 
   console.log(`sending cache request to ${requestURL}...`)
   const request = new Request(requestURL, new Request(receivedRequest, { headers }))

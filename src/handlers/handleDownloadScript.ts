@@ -34,8 +34,11 @@ function makeDownloadScriptRequest(request: Request, env: WorkerEnv): Promise<Re
 
 export async function handleDownloadScript(request: Request, env: WorkerEnv): Promise<Response> {
   try {
-    return await makeDownloadScriptRequest(request, env)
+    const resp = await makeDownloadScriptRequest(request, env)
+
+    return resp
   } catch (e) {
+    console.error(e)
     return createFallbackErrorResponse(e)
   }
 }

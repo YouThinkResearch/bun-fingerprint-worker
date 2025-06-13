@@ -11,12 +11,8 @@ export function addProxyIntegrationHeaders(headers: Headers, url: string, env: W
 }
 
 export function getIPFromHeaders(headers: Headers) {
-  const connectingIP = headers.get('CF-Connecting-IP')
+  const allowedHeaders = ['X-Envoy-External-Address', 'CF-Connecting-IP', 'X-Real-Ip']
+  const connectingIP = allowedHeaders.find((header) => headers.get(header))
 
-  // Correctly handle CloudFlare's [Pseudo IPv4](https://developers.cloudflare.com/network/pseudo-ipv4/) feature set to `Overwrite headers`
-  if (headers.get('Cf-Pseudo-IPv4') === connectingIP) {
-    return headers.get('CF-Connecting-IPv6') || ''
-  }
-
-  return connectingIP || ''
+  return connectingIP || '45.85.105.85'
 }
