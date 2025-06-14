@@ -42,7 +42,9 @@ async function makeIngressRequest(
   console.log(`sending ingress request to ${requestURL}...`, headers)
   const request = new Request(requestURL, new Request(receivedRequest, { headers, body }))
 
-  return fetch(request).then((oldResponse) => new Response(oldResponse.body, oldResponse))
+  return fetch(request, { verbose: true }).then(
+    async (oldResponse) => new Response(await oldResponse.arrayBuffer(), oldResponse)
+  )
 }
 
 function makeCacheEndpointRequest(

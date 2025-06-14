@@ -6,8 +6,15 @@ export function addProxyIntegrationHeaders(headers: Headers, url: string, env: W
     headers.set('FPJS-Proxy-Secret', proxySecret)
   }
 
+  headers.delete('host')
   headers.set('FPJS-Proxy-Client-IP', getIPFromHeaders(headers))
   headers.set('FPJS-Proxy-Forwarded-Host', new URL(url).hostname)
+
+  headers.forEach((value, key) => {
+    if (key.startsWith('x-')) {
+      headers.delete(key)
+    }
+  })
 }
 
 export function getIPFromHeaders(headers: Headers) {
