@@ -10,7 +10,7 @@ export function addProxyIntegrationHeaders(headers: Headers, url: string, env: W
   headers.set('FPJS-Proxy-Client-IP', getIPFromHeaders(headers))
   headers.set('FPJS-Proxy-Forwarded-Host', new URL(url).hostname)
 
-  headers.forEach((value, key) => {
+  headers.forEach((_, key) => {
     if (key.startsWith('x-')) {
       headers.delete(key)
     }
