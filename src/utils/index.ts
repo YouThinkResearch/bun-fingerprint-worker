@@ -24,3 +24,4 @@ export {
 } from './routing'
 export { getAgentScriptEndpoint, getVisitorIdEndpoint } from './proxyEndpoint'
 export { createResponseWithMaxAge } from './createResponseWithMaxAge'
+export { withoutHopByHopHeaders } from './withoutHopByHopHeaders'

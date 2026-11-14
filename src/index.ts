@@ -1,9 +1,9 @@
 import { handleRequest } from './handler'
 import { env } from 'node:process'
-import { returnHttpResponse } from './utils'
+import { returnHttpResponse, withoutHopByHopHeaders } from './utils'
 
 export default {
   async fetch(request: Request) {
-    return handleRequest(request, env as any).then(returnHttpResponse)
+    return handleRequest(withoutHopByHopHeaders(request), env as any).then(returnHttpResponse)
   },
 }
